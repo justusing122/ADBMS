@@ -4,9 +4,9 @@ db.products.createIndex({ productName: 1 })
 
 db.products.createIndex({ category: 1, price: -1 })
 
-db.products.find({ productName: 'Banana' }).sort({ price: 1 }).explain("executionStats")
+db.products.find({ productName: 'Banana' }).sort({ price: 1 })
 
-db.products.find({ productName: 'Banana' }).sort({ price: 1 }).explain("executionStats")
+db.products.find({ productName: 'Banana' }).sort({ price: 1 })
 
 db.products.find({ category: 'Fruit' }).sort({ price: -1 }).explain("executionStats")
 
