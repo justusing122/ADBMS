@@ -1,30 +1,12 @@
-# ADBMS
-from pymongo import MongoClient
+1) Update a document into collection
+    db. Teacher_info.update( { sal: { $gt: 25000 } }, { $set: { Dept_name: “ETC" } }, { multi: true } ) 
+    db. Teacher_info.update( { status: "A" } , { $inc: { sal: 10000 } }, { multi: true } ) 
 
-# Connect to the MongoDB database
-client = MongoClient("mongodb://localhost:27017/")  # Replace with your MongoDB URI
-db = client["grocery_shop_db"]
-collection = db["products"]
+2) Remove a document from collection
+    db.Teacher_info.remove({Teacher_id: "pic001"});
+    db. Teacher_info.remove({})
 
-# Define and create indexes
-collection.create_index([("name", 1)])  # Create an index on "name" field in ascending order
-collection.create_index([("price", -1)])  # Create an index on "price" field in descending order
-
-# Verify the indexes
-indexes = collection.list_indexes()
-for index in indexes:
-    print(index)
-
-# Test your indexed queries
-# For example, querying products by name with the "find" method
-result = collection.find({"name": "Milk"})
-for product in result:
-    print(product)
-
-# Drop an index
-collection.drop_index("price_-1")  # Drop the index on "price" field in descending order
-
-# Verify the indexes again to see that the "price" index is dropped
-indexes = collection.list_indexes()
-for index in indexes:
-    print(index)
+3) Retrieve a document in ascending or descending order using 1 for ascending and -1 for descendingfrom collection in mongodb
+    >db. Teacher_info.find( { status: "A" } ).sort( {sal: -1 } ) 
+    >db.audit.find().sort( { $natural: -1 } ).limit ( 10 )
+    >db.Employee.find().sort({_id:-1})
