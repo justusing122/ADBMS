@@ -1,3 +1,10 @@
-function map() {emit(this.cust_id,this.amount)}
-function reduce(key,values) {return Array.sum(values)}
-db.order.mapReduce(map,reduce,{out:{inline:1}})
+1) Map reduce
+  > function map() {emit(this.cust_id,this.amount)}
+  > function reduce(key,values) {return Array.sum(values)}
+  > db.order.mapReduce(map,reduce,{out:{inline:1}})
+
+
+2)Aggregate
+  > db.Teacher.aggregate([{$group:{_id:"$Department",totalsalary:{$sum:"$Salary"}}}])
+  > db.Teacher.aggregate([{$group:{_id:"$Department",totalsalary:{$sum:"$Salary"}}},{$match:{totalsalary:{$gte:200000}}}])
+  > db.Teacher.aggregate([ {$group:{_id:"$Department",totalsalary:{$sum:"$Salary"}}}, {$sort:{totalsalary:1}}])
